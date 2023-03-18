@@ -24,22 +24,18 @@ int main(int argc, char const** argv) {
     cout << "Key: ";
     getline(cin, seed);
     
+    // Output
+    string path = argv[1];
+    string ext = path.substr(path.find_last_of(".") + 1);
+    ofstream outputFile("crypted." + ext, ios::binary);
+
     // Encrypt
-    char* ciphertext = new char[size];
     seed_seq ss(seed.begin(), seed.end());
     mt19937 gen(ss);
     uniform_int_distribution<> dis(-128, 127);
-    for (int i = 0; i < size; ++i) ciphertext[i] = plaintext[i] ^ static_cast<char>(dis(gen));
-    
-    // Output
-    ofstream outputFile;
-    string path = argv[1];
-    string ext = path.substr(path.find_last_of(".") + 1);
-    outputFile.open("crypted." + ext, ios::binary);
-    for (int i=0; i<size; ++i) outputFile.put(ciphertext[i]);
-    outputFile.close();
+    for (int i=0; i<size; ++i) outputFile.put(plaintext[i] ^ static_cast<char>(dis(gen)));
 
     // Cleanup
-    delete[] ciphertext;
+    outputFile.close();
     return 0;
 }
