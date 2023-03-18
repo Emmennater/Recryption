@@ -37,5 +37,6 @@ int main(int argc, char const** argv) {
 
     // Cleanup
     outputFile.close();
+    delete[] plaintext;
     return 0;
 }
