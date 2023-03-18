@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]) {
 	cout << "Encrypt or Decrypt (1 or 0): ";
 	cin >> encrypting;
 	if (encrypting != 1 && encrypting != 0) exit(1);
-	ofstream outputFile((encrypting ? "encrypted." : "decrypting.") + fileExtension, ios::binary);
+	ofstream outputFile((encrypting ? "encrypted." : "decrypted.") + fileExtension, ios::binary);
 
 	// Encryption key
 	string key;
